@@ -14,6 +14,7 @@ impl ser::Serialize for Value {
             Value::Bool(x) => serializer.serialize_bool(*x),
             Value::Text(x) => serializer.serialize_str(x),
             Value::Null => serializer.serialize_unit(),
+            Value::Simple(x) => serializer.serialize_u8(*x),
 
             Value::Tag(t, v) => {
                 let mut acc = serializer.serialize_tuple_variant("@@TAG@@", 0, "@@TAGGED@@", 2)?;

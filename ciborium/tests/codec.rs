@@ -229,6 +229,10 @@ macro_rules! map {
     case(false, val!(false), "f4", false, same, None),
     case(true, val!(true), "f5", false, same, None),
     case(Value::Null, Value::Null, "f6", false, same, None),
+    case(Value::Simple(23), Value::Simple(23), "f7", false, same, None),  // CBOR simple value "undefined"
+    case(Value::Simple(0), Value::Simple(23), "e0", false, same, None),
+    case(Value::Simple(16), Value::Simple(23), "f0", false, same, None),
+    case(Value::Simple(255), Value::Simple(23), "f8ff", false, same, None),
     case(hex!(""), val!(&b""[..]), "40", false, same, None),
     case(hex!("01020304"), val!(&b"\x01\x02\x03\x04"[..]), "4401020304", false, same, None),
     case(hex!("0102030405"), val!(&b"\x01\x02\x03\x04\x05"[..]), "5f42010243030405ff", true, same, None),
